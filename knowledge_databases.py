@@ -18,9 +18,11 @@ def add_articles(topic_name,title,my_rating):
         session.commit()
 
 
-add_articles("brazil", "the wonders of south america", 4)
+#add_articles("brazil", "the wonders of south america", 4)
 # add_articles("soccer", "while is real madrid the greatest", 10)
 # add_articles("soccer", "while barcelone suck", 9)
+add_articles("h", "t", 8)
+add_articles("n", "k", 3)
 
 
 
@@ -67,15 +69,24 @@ def delete_article_by_rating(rating1):
   session.query(Knowledge).filter(Knowledge.my_rating<=rating1).delete()
   session.commit()
 
-     
 
+def top_5():
+  k=session.query(
+    Knowledge).order_by(
+    Knowledge.my_rating).all()
+  return k  
+    
+
+
+print(top_5())  
 #print(query_article_by_primary_key(3))
 #(delete_article_by_topic("soccer"))
 #print(query_article_by_topic("soccer"))
 #delete_all_articles()
 #edit_rating("the wonders of south america", 9)
-delete_article_by_rating(5)
-print(query_all())
+#delete_article_by_rating(5)
+#print(query_all())
+
 
 
 

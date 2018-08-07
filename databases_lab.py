@@ -13,7 +13,7 @@ class Knowledge(Base):
    my_rating = Column(Integer)
 
    def __repr__(self):
-    if self.my_rating>7:	
+    if self.my_rating>2:	
       return ("the topic id is {}\n" 
       	       "if you want to learn about: {}\n"
                "you should look at the article called: {} \n"
