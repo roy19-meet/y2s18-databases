@@ -18,9 +18,9 @@ def add_articles(topic_name,title,my_rating):
         session.commit()
 
 
-add_articles("brazil", "the wonders of south america", 8)
-add_articles("soccer", "while is real madrid the greatest", 10)
-add_articles("soccer", "while barcelone suck", 9)
+add_articles("brazil", "the wonders of south america", 4)
+# add_articles("soccer", "while is real madrid the greatest", 10)
+# add_articles("soccer", "while barcelone suck", 9)
 
 
 
@@ -28,7 +28,6 @@ def query_all():
   k = session.query(
       Knowledge).all()
   return k
-
 
 
 def query_article_by_topic(topic_name):
@@ -45,11 +44,40 @@ def query_article_by_primary_key(topic_id):
   return k
 
 
+def delete_article_by_topic(topic_name):
+  session.query(Knowledge).filter_by(
+    topic_name=topic_name).delete()
+  session.commit()
 
 
-#print(query_all())
+def delete_all_articles():
+  session.query(Knowledge).delete()
+  session.commit()
+
+
+def edit_rating(title,my_rating):
+  article_object = session.query(
+    Knowledge).filter_by(
+    title=title).first()
+  article_object.my_rating = my_rating
+  session.commit()
+
+
+def delete_article_by_rating(rating1):
+  session.query(Knowledge).filter(Knowledge.my_rating<=rating1).delete()
+  session.commit()
+
+     
+
+#print(query_article_by_primary_key(3))
+#(delete_article_by_topic("soccer"))
 #print(query_article_by_topic("soccer"))
-print(query_article_by_primary_key(1))
+#delete_all_articles()
+#edit_rating("the wonders of south america", 9)
+delete_article_by_rating(5)
+print(query_all())
+
+
 
 
 
